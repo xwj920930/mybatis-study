@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <typeAlias alias="role" type="com.xwj.entity.Role"/>
+        <!--<package name="com.xwj.entity"/>-->
+    </typeAliases>
+    <mappers>
+        <mapper resource="mapper/roleMapper.xml"/>
+        <!--<package name="com.xwj.dao"/>-->
+        <!--<mapper class="com.xwj.dao.UserDao"/>-->
+        <!--<mapper url="file:D:\工作\project\spring_mybatis\src\main\resources\mapper\userMapper.xml"/>-->
+        <mapper resource="mapper/userMapper.xml"/>
+        <mapper resource="mapper/identityCardMapper.xml"/>
+        <mapper resource="mapper/studentMapper.xml"/>
+        <mapper resource="mapper/courseMapper.xml"/>
+        <mapper resource="mapper/courseScoreMapper.xml"/>
+        <!--<package name="com.xwj.dao"/>-->
+    </mappers>
+</configuration>

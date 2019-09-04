@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xwj.dao.CourseScoreDao">
+    <resultMap id="courseScoreMap" type="com.xwj.entity.CourseScore">
+        <id property="id" column="id"/>
+        <result property="studentId" column="student_id"/>
+        <result property="courseId" column="course_id"/>
+        <result property="score" column="score"/>
+        <result property="comment" column="comment"/>
+        <!--<association property="course" javaType="com.xwj.entity.Course" >-->
+            <!--&lt;!&ndash;<id property="id" column="id"/>&ndash;&gt;-->
+            <!--<result property="name" column="name"/>-->
+            <!--<result property="comment" column="comment"/>-->
+        <!--</association>-->
+        <association property="course" column="student_id" select="com.xwj.dao.CourseDao.getCourse"/>
+    </resultMap>
+    <select id="getCourseScore" parameterType="int" resultMap="courseScoreMap">
+        SELECT s.score,c.name,s.id,s.student_id FROM course_score s,course c WHERE s.id=#{id} AND s.course_id=c.id;
+    </select>
+
+</mapper>

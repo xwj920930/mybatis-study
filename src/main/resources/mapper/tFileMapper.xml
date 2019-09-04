@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xwj.dao.TFileDao">
+    <resultMap id="tFileMap" type="com.xwj.entity.TFile">
+        <id column="id" property="id"/>
+        <result column="file" property="file"/>
+    </resultMap>
+    <insert id="insertTFile" parameterType="com.xwj.entity.TFile">
+        INSERT INTO t_file VALUES (#{id},#{file});
+    </insert>
+    <select id="getTFile"  resultMap="tFileMap">
+        SELECT * FROM t_file WHERE id=#{id}
+    </select>
+
+</mapper>

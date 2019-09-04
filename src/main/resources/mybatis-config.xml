@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="defaultExecutorType" value="BATCH"/>
+    </settings>
+    <typeAliases>
+        <typeAlias alias="role" type="com.xwj.entity.Role"/>
+        <!--<package name="com.xwj.entity"/>-->
+    </typeAliases>
+    <typeHandlers>
+        <typeHandler handler="com.xwj.utils.MyEnumHandler" javaType="com.xwj.entity.City"/>
+        <!--<typeHandler handler="org.apache.ibatis.type.EnumTypeHandler" javaType="com.xwj.entity.City" jdbcType="VARCHAR"/>-->
+        <!--<typeHandler handler="com.xwj.utils.MyHandler" javaType="string" jdbcType="VARCHAR"/>-->
+    </typeHandlers>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/sampledb"/>
+                <property name="username" value="xwj"/>
+                <property name="password" value="123456"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <databaseIdProvider type="DB_VENDOR">
+        <property name="SQL Server" value="sqlserver"/>
+        <property name="MySQL" value="mysql"/>
+        <property name="DB2" value="db2"/>
+        <property name="Oracle" value="oracle"/>
+    </databaseIdProvider>
+    <mappers>
+        <mapper resource="mapper/roleMapper.xml"/>
+        <!--<package name="com.xwj.dao"/>-->
+        <!--<mapper class="com.xwj.dao.UserDao"/>-->
+        <!--<mapper url="file:D:\工作\project\spring_mybatis\src\main\resources\mapper\userMapper.xml"/>-->
+        <mapper resource="mapper/userMapper.xml"/>
+        <mapper resource="mapper/identityCardMapper.xml"/>
+        <mapper resource="mapper/studentMapper.xml"/>
+        <mapper resource="mapper/courseMapper.xml"/>
+        <mapper resource="mapper/courseScoreMapper.xml"/>
+        <mapper resource="mapper/tFileMapper.xml"/>
+        <mapper resource="mapper/procedureMapper.xml"/>
+        <mapper resource="mapper/billMapper.xml"/>
+        <mapper resource="mapper/colorMapper.xml"/>
+        <!--<package name="com.xwj.dao"/>-->
+    </mappers>
+</configuration>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xwj.dao.TBillDao">
+    <resultMap id="billMap" type="com.xwj.entity.TBill">
+        <id property="id" column="id"/>
+        <result property="billName" column="bill_name"/>
+        <result property="note" column="note"/>
+    </resultMap>
+    <select id="getTBill" resultMap="billMap">
+        SELECT * FROM t_bill_${year} WHERE id=#{id};
+    </select>
+    <select id="getTBill2018" resultMap="billMap">
+        SELECT * FROM t_bill_2018
+    </select>
+
+</mapper>

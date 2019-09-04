@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xwj.dao.RoleDao">
+    <resultMap id="roleMap" type="role">
+        <id column="id" property="id" javaType="int" jdbcType="INTEGER"/>
+        <result column="name" property="name"  typeHandler="com.xwj.utils.MyHandler"/>
+        <result column="address" property="address" javaType="string" jdbcType="VARCHAR"/>
+    </resultMap>
+    <insert id="insertRole" parameterType="role" useGeneratedKeys="true" keyProperty="id">
+        <selectKey keyProperty="id" resultType="int" order="BEFORE">
+            SELECT CEIL(RAND()*100);
+        </selectKey>
+        <if test="_parameter.name!=null">
+            INSERT INTO role (id,name, address) VALUES (#{id},#{_parameter.name},#{address});
+        </if>
+    </insert>
+    <update id="updateRole" parameterType="inT">
+        UPDATE role
+        <set>
+            <if test="_parameter!=null">
+                name='xxx',
+            </if>
+        </set>
+        WHERE id=#{id,javaType=int,jdbcType=INTEGER}
+    </update>
+    <!--<sql id="sq">-->
+        <!--*-->
+    <!--</sql>-->
+    <select id="getRole" parameterType="int" resultMap="roleMap">
+        SELECT * FROM role WHERE id=#{id};
+    </select>
+    <delete id="deleteRole" parameterType="int">
+        <!--<bind name="idd" value="_parameter"/>-->
+        <if test="_parameter.get('param1')!=null">
+            DELETE FROM role WHERE id=#{param1};
+        </if>
+    </delete>
+    <select id="getRoles" resultType="com.xwj.entity.Role">
+        SELECT * FROM role WHERE id IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
+</mapper>

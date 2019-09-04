@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xwj.dao.CourseDao">
+    <resultMap id="courseMap" type="com.xwj.entity.Course">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="comment" column="comment"/>
+    </resultMap>
+    <select id="getCourse" parameterType="int" resultMap="courseMap">
+        SELECT * FROM course WHERE id=#{id};
+    </select>
+
+</mapper>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xwj.dao.StudentDao">
+    <resultMap id="studentMap" type="com.xwj.entity.Student">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="sex" column="sex"/>
+        <result property="identityId" column="identity_id"/>
+        <result property="comment" column="comment"/>
+        <association property="identityCard" javaType="com.xwj.entity.IdentityCard" resultMap="com.xwj.dao.IdentityCardDao.identityCardMap">
+            <!--<id property="id" column="id"/>-->
+            <!--<result property="studentId" column="student_id"/>-->
+            <!--<result property="native_" column="native"/>-->
+            <!--<result property="startDate" column="start_date"/>-->
+            <!--<result property="endDate" column="end_date"/>-->
+            <!--<result property="comment" column="comment"/>-->
+        </association>
+        <collection property="courseScores" javaType="java.util.ArrayList" ofType="com.xwj.entity.CourseScore">
+            <result property="courseId" column="course_id"/>
+            <result property="score" column="score"/>
+            <association property="course" javaType="com.xwj.entity.Course" >
+                <!--<id property="id" column="id"/>-->
+                <result property="name" column="name"/>
+                <result property="comment" column="comment"/>
+            </association>
+
+        </collection>
+        <discriminator javaType="int" column="sex">
+            <case value="0" resultMap="maleMap"/>
+            <case value="1" resultMap="femaleMap"/>
+        </discriminator>
+        <!--<association property="identityCard" column="id" select="com.xwj.dao.IdentityCardDao.getCardByStudentId"/>-->
+    </resultMap>
+    <resultMap id="maleMap" type="com.xwj.entity.MaleStudent" extends="studentMap">
+        <result property="male" column="check2"/>
+    </resultMap>
+    <!--SELECT * FROM student WHERE id=#{id};-->
+    <select id="getStudentById" parameterType="int" resultMap="studentMap">
+        SELECT s.name,s.sex,c.native FROM student s,identity_card c WHERE s.id=#{id} AND c.student_id=s.id;
+    </select>
+    <!--SELECT s.name,c.course_id,c.score FROM student s,course_score c WHERE s.id=#{id} AND c.student_id=s.id;-->
+    <select id="getStudent" parameterType="int" resultMap="studentMap">
+        SELECT s.name,s.identity_id,s.sex,m.check2 FROM student s,male_health m WHERE s.id=1 AND m.student_id=s.id
+
+    </select>
+
+</mapper>

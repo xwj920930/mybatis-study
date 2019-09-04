@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xwj.dao.ColorDao">
+    <resultMap id="colorMap" type="com.xwj.entity.ColorSet">
+        <result column="color" property="color" javaType="com.xwj.entity.Color" jdbcType="INTEGER" typeHandler="com.xwj.utils.ColorEnumTypeHandler"/>
+    </resultMap>
+    <select id="getColor"  resultMap="colorMap" databaseId="mysql">
+    SELECT 1 color
+    </select>
+
+</mapper>

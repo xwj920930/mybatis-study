@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xwj.dao.IdentityCardDao">
+    <resultMap id="identityCardMap" type="com.xwj.entity.IdentityCard">
+        <id property="id" column="id"/>
+        <result property="studentId" column="student_id"/>
+        <result property="native_" column="native"/>
+        <result property="startDate" column="start_date"/>
+        <result property="endDate" column="end_date"/>
+        <result property="comment" column="comment"/>
+    </resultMap>
+    <select id="getCardByStudentId" parameterType="int" resultMap="identityCardMap">
+        SELECT * FROM identity_card WHERE student_id=#{studentId};
+    </select>
+
+</mapper>
